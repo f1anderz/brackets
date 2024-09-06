@@ -86,6 +86,16 @@
   --green-800: #05603a;
   --green-900: #053321;
 
+  --blue-100: #d1e9ff;
+  --blue-200: #b2ddff;
+  --blue-300: #84caff;
+  --blue-400: #53b1fd;
+  --blue-500: #2e90fa;
+  --blue-600: #1570ef;
+  --blue-700: #175cd3;
+  --blue-800: #1849a9;
+  --blue-900: #102a56;
+
   // GRADIENTS
 
   --bg-gradient: linear-gradient(
@@ -98,6 +108,13 @@
     var(--neutral-200),
     var(--primary-100)
   );
+
+  --header-gradient: linear-gradient(
+    45deg,
+    var(--primary-700),
+    var(--primary-600),
+    var(--primary-500)
+  );
 }
 
 *,
@@ -107,6 +124,7 @@
   margin: 0;
   padding: 0;
   font-family: 'Inter', sans-serif;
+  text-decoration: none;
 }
 
 body {
@@ -115,7 +133,7 @@ body {
 
 main {
   position: relative;
-  height: 100%;
+  height: calc(100vh - 44px);
   width: 100%;
   background: var(--bg-gradient);
 }
