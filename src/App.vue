@@ -1,5 +1,5 @@
 <template>
-  <header></header>
+  <BkHeader />
   <main>
     <RouterView />
   </main>
@@ -7,6 +7,7 @@
 
 <script setup>
 import { RouterView } from 'vue-router';
+import BkHeader from '@/components/BkHeader.vue';
 </script>
 
 <style></style>
