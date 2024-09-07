@@ -115,6 +115,14 @@
     var(--primary-600),
     var(--primary-500)
   );
+
+  --text-gradient: linear-gradient(
+    45deg,
+    var(--primary-900),
+    var(--primary-800),
+    var(--primary-800),
+    var(--accent-900)
+  );
 }
 
 *,
