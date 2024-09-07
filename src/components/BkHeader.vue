@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import ProfileBlock from '@/components/headers/ProfileBlock.vue';
+import ProfileBlock from '@/components/header/ProfileBlock.vue';
 </script>
 
 <style scoped lang="scss">
