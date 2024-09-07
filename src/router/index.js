@@ -7,15 +7,20 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'Homepage',
       component: HomeView,
     },
     {
       path: '/:pathMatch(.*)',
-      name: 'notFound',
+      name: 'Page not found',
       component: NotFound,
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  document.title = to.name;
+  next();
 });
 
 export default router;
