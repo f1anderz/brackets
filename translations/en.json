@@ -1,0 +1,13 @@
+{
+  "create": "Create",
+  "join": "Join",
+  "home": "Home",
+  "help": "Help",
+  "please_select": "Please select...",
+  "please_input": "Please input...",
+  "page_not_found": {
+    "header": "Page not found",
+    "message": "The page you are looking for is gone or never existed.",
+    "back_to_homepage": "Back to Homepage"
+  }
+}
