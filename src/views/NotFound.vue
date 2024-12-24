@@ -2,13 +2,14 @@
   <div class="bk__not_found">
     <h1 class="error-title">{{ t('page_not_found.header') }}</h1>
     <h3 class="error-text">{{ t('page_not_found.message') }}</h3>
-    <BkButton href="/" contentKey="page_not_found.back_to_homepage" type="outline" />
+    <BkButton href="/" contentKey="page_not_found.back_to_homepage" :type="BkButtonTypes.primary" />
   </div>
 </template>
 
-<script setup>
-import BkButton from '@/components/base/BkButton.vue';
+<script setup lang="ts">
+import BkButton from '@/components/base/BkButton/BkButton.vue';
 import { useI18n } from 'vue-i18n';
+import { BkButtonTypes } from '@/components/base/BkButton/BkButton.types.ts';
 
 const { t } = useI18n();
 </script>

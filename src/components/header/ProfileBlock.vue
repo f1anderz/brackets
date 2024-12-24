@@ -2,7 +2,7 @@
   <div class="profile-block"></div>
 </template>
 
-<script setup></script>
+<script setup lang="ts"></script>
 
 <style scoped lang="scss">
 .profile-block {

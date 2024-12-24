@@ -1,9 +1,13 @@
 import type { Preview } from '@storybook/vue3';
 import { setup } from '@storybook/vue3';
 import { createPinia } from 'pinia';
-import { i18n } from '../src/utils/initI18n';
-
+import { createI18nInstance } from '../src/utils/initI18n';
 import '../src/assets/scss/main.scss';
+
+let i18n;
+createI18nInstance().then(response => {
+  i18n = response;
+});
 
 setup(app => {
   app.use(createPinia()).use(i18n);

@@ -22,7 +22,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { onClickOutside, useFocus } from '@vueuse/core';
 import BkIcon from '@/components/base/BkIcon.vue';
