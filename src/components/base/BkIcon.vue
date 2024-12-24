@@ -1,11 +1,15 @@
 <template>
-  <img :src="chevronPath" class="bk-icon" :class="sizeClass" :alt="`Icon ${name}`" />
+  <svg
+    :class="['bk-icon', `bk-icon-${size}`]"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <use :xlink:href="`${sprite}#${name}`"></use>
+  </svg>
 </template>
 
-<script setup>
-import { computed } from 'vue';
-
-const props = defineProps({
+<script setup lang="ts">
+defineProps({
   name: {
     type: String,
     required: true,
@@ -13,38 +17,36 @@ const props = defineProps({
   size: {
     type: String,
     default: 'm',
-    validator: (value) => ['xs', 's', 'm', 'l', 'xl'].includes(value),
+    validator: (value: string) => ['xs', 's', 'm', 'l', 'xl'].includes(value),
   },
 });
 
-const chevronPath = computed(
-  () => new URL(`/src/assets/img/${props.name}.svg`, import.meta.url).href
-);
-
-const sizeClass = computed(() => `bk-icon-${props.size}`);
+const sprite = './icons.svg';
 </script>
 
 <style scoped lang="scss">
 .bk-icon {
+  fill: currentColor;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  display: inline-block;
+  width: var(--bk-icon-size);
+  height: var(--bk-icon-size);
+
   &.bk-icon-xs {
-    width: 12px;
-    height: 12px;
+    --bk-icon-size: 12px;
   }
   &.bk-icon-s {
-    width: 16px;
-    height: 16px;
+    --bk-icon-size: 16px;
   }
   &.bk-icon-m {
-    width: 20px;
-    height: 20px;
+    --bk-icon-size: 20px;
   }
   &.bk-icon-l {
-    width: 24px;
-    height: 24px;
+    --bk-icon-size: 24px;
   }
   &.bk-icon-xl {
-    width: 28px;
-    height: 28px;
+    --bk-icon-size: 28px;
   }
 }
 </style>
