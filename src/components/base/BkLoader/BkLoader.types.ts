@@ -5,6 +5,7 @@ export enum BkLoaderSizes {
 }
 
 export enum BkLoaderVariants {
+  inherit = 'inherit',
   light = 'light',
   dark = 'dark',
 }

@@ -12,7 +12,7 @@ import {
 
 withDefaults(defineProps<BkLoaderProps>(), {
   size: BkLoaderSizes.medium,
-  variant: BkLoaderVariants.dark,
+  variant: BkLoaderVariants.inherit,
 });
 </script>
 
@@ -25,6 +25,10 @@ withDefaults(defineProps<BkLoaderProps>(), {
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
+
+  &.inherit {
+    --loader-color: currentColor;
+  }
 
   &.light {
     --loader-color: var(--primary-200);
@@ -41,13 +45,13 @@ withDefaults(defineProps<BkLoaderProps>(), {
   }
 
   &.m {
-    border-width: 3px;
+    border-width: 2.5px;
     width: 24px;
     height: 24px;
   }
 
   &.l {
-    border-width: 4px;
+    border-width: 3px;
     width: 32px;
     height: 32px;
   }
