@@ -2,7 +2,7 @@
   <div class="bk__not_found">
     <h1 class="error-title">{{ t('page_not_found.header') }}</h1>
     <h3 class="error-text">{{ t('page_not_found.message') }}</h3>
-    <BkButton href="/" contentKey="page_not_found.back_to_homepage" :type="BkButtonTypes.primary" />
+    <BkButton href="/" contentKey="page_not_found.back_to_homepage" :type="BkButtonTypes.outline" />
   </div>
 </template>
 
