@@ -7,7 +7,10 @@
         :placeholder="t(placeholder)"
         class="bk-select-input"
       />
-      <BkIcon :name="isSelectOpen ? 'chevron-up' : 'chevron-down'" size="s" />
+      <BkIcon
+        :name="isSelectOpen ? BkIconNames['chevron-up'] : BkIconNames['chevron-down']"
+        :size="BkIconSizes.s"
+      />
     </div>
     <div v-if="isSelectOpen" class="bk-select-options">
       <div
@@ -23,27 +26,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { computed, ref, watch, withDefaults } from 'vue';
 import { onClickOutside, useFocus } from '@vueuse/core';
-import BkIcon from '@/components/base/BkIcon.vue';
+import BkIcon from '@/components/base/BkIcon/BkIcon.vue';
 import { useI18n } from 'vue-i18n';
+import type { BkSelectProps } from '@/components/base/BkSelect/BkSelect.types.ts';
+import { BkIconNames, BkIconSizes } from '@/components/base/BkIcon/BkIcon.types.ts';
 
 const { t } = useI18n();
 
-const props = defineProps({
-  options: {
-    type: Array,
+const props = withDefaults(defineProps<BkSelectProps>(), {
+  normalizer: (option: object) => {
+    return { id: option.id, label: option.name };
   },
-  normalizer: {
-    type: Function,
-    default: option => {
-      return { id: option.id, label: option.name };
-    },
-  },
-  placeholder: {
-    type: String,
-    default: 'please_select',
-  },
+  placeholder: 'please_select',
 });
 
 const selectRef = ref();
@@ -68,7 +64,7 @@ watch(isSelectOpen, () => (focused.value = isSelectOpen.value));
 const value = defineModel();
 
 const optionsComputed = computed(() => props.options.map(option => props.normalizer(option)));
-function selectOption(label) {
+function selectOption(label: string) {
   value.value = label;
   closeSelect();
 }
@@ -78,12 +74,16 @@ function selectOption(label) {
 .bk-select {
   --select-input-background: var(--white);
   --select-input-border-color: var(--primary-200);
-  --select-input-focus-color: var(--primary-500);
+  --select-input-focus-border-color: var(--primary-500);
   --select-options-background: var(--white);
   --select-text-color: var(--primary-900);
   --select-placeholder-color: var(--neutral-500);
+  --menu-background: var(--neutral-alpha-100);
+  --menu-border-color: var(--primary-200);
+  --option-hover-background: var(--neutral-100);
 
   position: relative;
+  width: fit-content;
 
   .bk-select-input-container {
     .bk-select-input {
@@ -97,7 +97,7 @@ function selectOption(label) {
 
       &:hover,
       &:focus {
-        outline-color: var(--select-input-focus-color);
+        outline-color: var(--select-input-focus-border-color);
       }
 
       &::placeholder {
@@ -113,10 +113,11 @@ function selectOption(label) {
 
   .bk-select-options {
     position: absolute;
-    margin-top: 4px;
-    padding: 4px 4px 10px 4px;
     width: calc(100% + 6px);
-    background: var(--white);
+    margin-top: 4px;
+    padding: 4px 2px;
+    background: var(--menu-background);
+    border: 1px solid var(--menu-border-color);
     border-radius: 10px;
     max-height: 200px;
     overflow: auto;
@@ -124,13 +125,13 @@ function selectOption(label) {
     .bk-select-option {
       width: fit-content;
       min-width: 100%;
-      padding: 4px 8px;
+      padding: 4px 6px;
       border-radius: 10px;
       cursor: pointer;
       text-wrap: nowrap;
 
       &:hover {
-        background: var(--neutral-100);
+        background: var(--option-hover-background);
       }
     }
   }
