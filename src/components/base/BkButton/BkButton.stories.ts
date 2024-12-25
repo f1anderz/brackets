@@ -44,6 +44,13 @@ export const Outline: Story = {
     contentKey: 'page_not_found.back_to_homepage',
   },
 };
+export const Outline_Icon: Story = {
+  args: {
+    type: BkButtonTypes.outline,
+    contentKey: 'page_not_found.back_to_homepage',
+    icon: 'chevron-right',
+  },
+};
 export const Outline_Loading: Story = {
   args: {
     type: BkButtonTypes.outline,

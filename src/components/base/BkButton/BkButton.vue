@@ -2,16 +2,16 @@
   <component
     :is="href ? 'RouterLink' : 'button'"
     :to="href ? href : undefined"
-    :class="[classes, { link: href, disabled: disabled, loading: loading }]"
+    :class="[`bk-button ${type}`, { link: href, disabled: disabled, loading: loading }]"
+    @click="handleClick"
   >
-    <BkLoader v-if="loading" :size="BkLoaderSizes.small" :variant="LoaderVariant" />
+    <BkLoader v-if="loading" :size="BkLoaderSizes.small" :variant="BkLoaderVariants.inherit" />
     <BkIcon v-if="icon && !loading" :name="icon" size="xs" />
     <slot>{{ contentKey ? t(contentKey) : content }}</slot>
   </component>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { type BkButtonProps, BkButtonTypes } from '@/components/base/BkButton/BkButton.types.ts';
 import BkLoader from '@/components/base/BkLoader/BkLoader.vue';
@@ -23,14 +23,16 @@ const props = withDefaults(defineProps<BkButtonProps>(), {
   disabled: false,
   loading: false,
 });
+const emit = defineEmits(['click']);
 
 const { t } = useI18n();
 
-const classes = computed(() => `bk-button ${props.type}`);
-
-const LoaderVariant = computed(() =>
-  props.type === BkButtonTypes.primary ? BkLoaderVariants.light : BkLoaderVariants.dark
-);
+function handleClick() {
+  if (props.disabled) {
+    return;
+  }
+  emit('click');
+}
 </script>
 
 <style scoped lang="scss">
@@ -45,14 +47,14 @@ const LoaderVariant = computed(() =>
   --primary-disabled-background: var(--neutral-500);
   --primary-disabled-border-color: var(--neutral-500);
 
-  --outline-color: var();
-  --outline-background: var();
-  --outline-border-color: var();
-  --outline-hover-color: var();
-  --outline-hover-background: var();
-  --outline-disabled-color: var();
-  --outline-disabled-background: var();
-  --outline-disabled-border-color: var();
+  --outline-color: var(--primary-800);
+  --outline-background: var(--white);
+  --outline-border-color: var(--primary-800);
+  --outline-hover-color: var(--primary-700);
+  --outline-hover-background: var(--neutral-100);
+  --outline-disabled-color: var(--neutral-500);
+  --outline-disabled-background: var(--neutral-200);
+  --outline-disabled-border-color: var(--neutral-500);
 
   display: flex;
   flex-direction: row;
@@ -71,9 +73,12 @@ const LoaderVariant = computed(() =>
   background: var(--button-background);
   border-color: var(--button-border-color);
 
-  &.disabled,
-  &.loading {
+  &.disabled {
     cursor: not-allowed;
+  }
+
+  &.loading {
+    cursor: progress;
   }
 
   .link {
@@ -90,6 +95,12 @@ const LoaderVariant = computed(() =>
       --button-color: var(--primary-disabled-color);
       --button-background: var(--primary-disabled-background);
       --button-border-color: var(--primary-disabled-border-color);
+    }
+
+    &.loading:hover {
+      --button-color: var(--primary-color);
+      --button-background: var(--primary-background);
+      --button-border-color: var(--primary-border-color);
     }
 
     &:hover {
@@ -109,6 +120,12 @@ const LoaderVariant = computed(() =>
       --button-color: var(--outline-disabled-color);
       --button-background: var(--outline-disabled-background);
       --button-border-color: var(--outline-disabled-border-color);
+    }
+
+    &.loading:hover {
+      --button-color: var(--outline-color);
+      --button-background: var(--outline-background);
+      --button-border-color: var(--outline-border-color);
     }
 
     &:hover {
