@@ -18,7 +18,7 @@ const router: Router = createRouter({
   ],
 });
 
-const DEFAULT_TITLE = 'Brackets';
+const DEFAULT_TITLE: string = 'Brackets';
 router.afterEach(to => {
   document.title = to.name?.toString() || DEFAULT_TITLE;
 });
