@@ -6,7 +6,7 @@
     @click="handleClick"
   >
     <BkLoader v-if="loading" :size="BkLoaderSizes.small" :variant="BkLoaderVariants.inherit" />
-    <BkIcon v-if="icon && !loading" :name="icon" size="xs" />
+    <BkIcon v-if="icon && !loading" :name="icon" :size="BkIconSizes.xs" />
     <slot>{{ contentKey ? t(contentKey) : content }}</slot>
   </component>
 </template>
@@ -16,7 +16,8 @@ import { useI18n } from 'vue-i18n';
 import { type BkButtonProps, BkButtonTypes } from '@/components/base/BkButton/BkButton.types.ts';
 import BkLoader from '@/components/base/BkLoader/BkLoader.vue';
 import { BkLoaderSizes, BkLoaderVariants } from '@/components/base/BkLoader/BkLoader.types.ts';
-import BkIcon from '@/components/base/BkIcon.vue';
+import BkIcon from '@/components/base/BkIcon/BkIcon.vue';
+import { BkIconSizes } from '@/components/base/BkIcon/BkIcon.types.ts';
 
 const props = withDefaults(defineProps<BkButtonProps>(), {
   type: BkButtonTypes.primary,

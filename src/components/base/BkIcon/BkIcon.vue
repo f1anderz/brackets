@@ -9,16 +9,11 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-  name: {
-    type: String,
-    required: true,
-  },
-  size: {
-    type: String,
-    default: 'm',
-    validator: (value: string) => ['xs', 's', 'm', 'l', 'xl'].includes(value),
-  },
+import { withDefaults } from 'vue';
+import { type BkIconProps, BkIconSizes } from '@/components/base/BkIcon/BkIcon.types.ts';
+
+withDefaults(defineProps<BkIconProps>(), {
+  size: BkIconSizes.m,
 });
 
 const sprite = './icons.svg';

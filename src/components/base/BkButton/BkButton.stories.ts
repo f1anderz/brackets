@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/vue3';
 
 import BkButton from './BkButton.vue';
 import { BkButtonTypes } from './BkButton.types.ts';
+import { BkIconNames } from '@/components/base/BkIcon/BkIcon.types.ts';
 
 const meta: Meta<typeof BkButton> = {
   component: BkButton,
@@ -20,7 +21,7 @@ export const Primary_Icon: Story = {
   args: {
     type: BkButtonTypes.primary,
     contentKey: 'create',
-    icon: 'chevron-down',
+    icon: BkIconNames['chevron-down'],
   },
 };
 export const Primary_Loading: Story = {
@@ -48,7 +49,7 @@ export const Outline_Icon: Story = {
   args: {
     type: BkButtonTypes.outline,
     contentKey: 'page_not_found.back_to_homepage',
-    icon: 'chevron-right',
+    icon: BkIconNames['chevron-down'],
   },
 };
 export const Outline_Loading: Story = {
