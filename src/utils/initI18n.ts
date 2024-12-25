@@ -1,26 +1,32 @@
 import { createI18n } from 'vue-i18n';
 
-const locales = ['en', 'uk'];
+const locales: string[] = ['en', 'uk'] as const;
 
-const currentLocale = getCurrentLocale();
-const messages = await getMessages();
+type Locale = (typeof locales)[number];
 
-export const i18n = createI18n({
-  legacy: false,
-  locale: currentLocale,
-  fallbackLocale: 'en',
-  messages,
-});
+type Messages = Record<Locale, Record<string, string>>;
 
-function getCurrentLocale() {
+function getCurrentLocale(): Locale {
   return 'en';
 }
 
-async function getMessages() {
-  const messages = {};
+async function getMessages(): Promise<Messages> {
+  const messages: Partial<Messages> = {};
   for (const locale of locales) {
     const response = await fetch(`../../../translations/${locale}.json`);
     messages[locale] = await response.json();
   }
-  return messages;
+  return messages as Messages;
+}
+
+export async function createI18nInstance() {
+  const currentLocale = getCurrentLocale();
+  const messages = await getMessages();
+
+  return createI18n({
+    legacy: false,
+    locale: currentLocale,
+    fallbackLocale: 'en',
+    messages,
+  });
 }
