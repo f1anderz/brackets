@@ -42,6 +42,8 @@ const props = withDefaults(defineProps<BkSelectProps>(), {
   placeholder: 'please_select',
 });
 
+const value = defineModel();
+
 const selectRef = ref();
 const { focused } = useFocus(selectRef);
 
@@ -60,8 +62,6 @@ function triggerSelect() {
   isSelectOpen.value = !isSelectOpen.value;
 }
 watch(isSelectOpen, () => (focused.value = isSelectOpen.value));
-
-const value = defineModel();
 
 const optionsComputed = computed(() => props.options.map(option => props.normalizer(option)));
 function selectOption(label: string) {
