@@ -25,6 +25,8 @@ header {
   align-items: center;
   background: var(--header-gradient);
   padding: 12px 24px 12px 16px;
+  font-weight: 500;
+  font-size: 16px;
 
   nav {
     display: flex;
