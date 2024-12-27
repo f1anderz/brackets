@@ -9,7 +9,6 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults } from 'vue';
 import { type BkIconProps, BkIconSizes } from '@/components/base/BkIcon/BkIcon.types.ts';
 
 withDefaults(defineProps<BkIconProps>(), {

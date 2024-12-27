@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch, withDefaults } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { onClickOutside, useFocus } from '@vueuse/core';
 import BkIcon from '@/components/base/BkIcon/BkIcon.vue';
 import { useI18n } from 'vue-i18n';
